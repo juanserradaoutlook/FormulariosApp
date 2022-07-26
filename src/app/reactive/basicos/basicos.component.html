@@ -1,0 +1,77 @@
+<h2>Reactivos: Basicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label" for="">Producto</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                            class="form-control"
+                            placeholder="Nombre del Producto"
+                            formControlName="nombre">
+                            <span class="form-text text-danger"
+                                *ngIf="campoEsValido('nombre')">
+                                    Debe ser de 3 letras
+                            </span>
+                </div>
+            </div>
+            <!-- Precio de Producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label" for="">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                            class="form-control"
+                            placeholder="Precio del Producto"
+                            formControlName="precio">
+                            <span class="form-text text-danger"
+                                  *ngIf="campoEsValido('precio')">
+                                El precio debe ser 0 o mayor
+                            </span>
+                </div>
+            </div>
+            <!-- Existencia del Producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label" for="">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                            class="form-control"
+                            placeholder="Existencias del Producto"
+                            formControlName="existencias">
+                            <span class="form-text text-danger"
+                                  *ngIf="campoEsValido('existencias')">
+                                Las existencias deben ser 0 o mayor
+                            </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end"> Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <span>Valid: No es valido porque el producto y el precio son obligatorios</span>
+        <pre>{{miFormulario.valid}}</pre>
+
+        <span>Pristine: Indica que el formulario con sus valores internos no se han tocado, no se han cambiado los valores con los que se presento al usuario </span>
+        <pre>{{miFormulario.pristine}}</pre>
+
+        <span>Touched: Cuando el formulario no se ha tocado</span>
+        <pre>{{miFormulario.touched}}</pre>
+
+        <span>Value</span>
+        <pre>{{miFormulario.value | json}}</pre>
+
+        <span>Precio</span>
+        <pre>{{miFormulario.controls['precio'].errors | json}}</pre>
+    </div>
+</div>

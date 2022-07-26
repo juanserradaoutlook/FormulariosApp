@@ -1,0 +1,82 @@
+<h2>Template: Basicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="guardar2()" 
+                #miFormulario="ngForm"
+                autocomplete="off">
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label" for="">Producto</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                            [ngModel]="initForm.campoProducto"
+                            name="campoProducto"
+                            class="form-control"
+                            required
+                            minlength="3" 
+                            placeholder="Nombre del Producto">
+                            <span *ngIf="nombreValido()" 
+                                class="form-text text-danger">Debe ser de 3 letras</span>
+                </div>
+            </div>
+            <!-- Precio de Producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label" for="">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                            [ngModel]="initForm.campoPrecio"
+                            name="campoPrecio"
+                            required
+                            class="form-control"
+                            placeholder="Precio del Producto">
+                            <span *ngIf="precioValido()" 
+                            class="form-text text-danger">El precio debe ser 0 o mayor</span>
+                </div>
+            </div>
+            <!-- Existencia del Producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label" for="">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                            [ngModel]="initForm.campoExistencias"
+                            name="campoExistencias"
+                            customMin
+                            [minimo] = '0'
+                            class="form-control"
+                            placeholder="Existencias del Producto"
+                            required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            [disabled]="miFormulario.invalid"
+                            class="btn btn-primary float-end"> Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <span>Valid: No es valido porque el producto y el precio son obligatorios</span>
+        <pre>{{miFormulario.valid}}</pre>
+
+        <span>Pristine: Indica que el formulario con sus valores internos no se han tocado, no se han cambiado los valores con los que se presento al usuario </span>
+        <pre>{{miFormulario.pristine}}</pre>
+
+        <span>Touched: Cuando el formulario no se ha tocado</span>
+        <pre>{{miFormulario.touched}}</pre>
+
+        <span>Value</span>
+        <pre>{{miFormulario.value | json}}</pre>
+
+        <span>CustomDirective</span>
+        <pre>{{miFormulario.controls['existencias']?.errors | json}}</pre>
+
+    </div>
+</div>
